@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +38,22 @@ public class TaskController {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        return mv;
+    }
+    
+    @RequestMapping(value="/check/{id}", method=RequestMethod.POST)
+    public ModelAndView checkTask(@PathVariable("id") String taskId, HttpServletResponse response) {
+        ModelAndView mv = new ModelAndView("main");
+        
+        Task currTask = taskService.findByID(Long.parseLong(taskId));
+        taskService.toggleTaskCheck(currTask);
+        try {
+            response.sendRedirect("/to-do-service/");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
         return mv;
     }
     

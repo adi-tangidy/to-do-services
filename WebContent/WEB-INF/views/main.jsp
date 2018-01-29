@@ -35,8 +35,12 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<form action="add" method="post">
-					<input name="task" type="text" maxlength="100" size="100">
-					<button type="submit">Submit</button>
+					<div class="input-group">
+						<input name="task" class="form-control" type="text" placeholder="Enter New To Do Item...">
+						<div class="input-group-btn">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</div>
 				</form>
 
 			</div>
@@ -45,24 +49,20 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Is Checked ?</th>
-								<th>Task Name</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="task" items="${taskList }">
-								<tr>
-									<td><input type="checkbox" "/></td>
-									<td>${task.taskName }</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
+				<ul>
+					<c:forEach var="task" items="${taskList }">
+						<c:choose>
+							<c:when test="${task.checked}">
+								<li style="text-decoration: line-through;">${task.taskName }</li>
+							</c:when>
+							<c:otherwise>
+								<form action="check/${task.id}" method="POST">
+								<li>${task.taskName }<button class="btn btn-default">Done</button></li>
+								</form>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</ul>
 			</div>
 			<div class="col-md-2"></div>
 		</div>

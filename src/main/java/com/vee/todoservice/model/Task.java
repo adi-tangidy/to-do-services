@@ -4,10 +4,10 @@ public class Task {
 
     private Long id;
     private String taskName;
-    private boolean isChecked;
+    private boolean checked;
     public Task() {
         // default creation isChecked = false
-        isChecked = false;
+        checked = false;
     }
 
     public Task(String taskName) {
@@ -31,16 +31,17 @@ public class Task {
         this.taskName = taskName;
     }
 
+
     public boolean isChecked() {
-        return isChecked;
+        return checked;
     }
-
-    public void setChecked(boolean isChecked) {
-        this.isChecked = isChecked;
+    
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
-
+    
     @Override
     public String toString() {
-        return "Task [id=" + id + ", taskName=" + taskName + ", isChecked=" + isChecked + "]";
+        return "Task [id=" + id + ", taskName=" + taskName + ", checked=" + checked + "]";
     }
 }

@@ -23,8 +23,11 @@ public class DummyTaskService implements TaskService {
     }
     
     public Task addTask(Task task) {
-        task.setId(getNextId());
-        this.dummyTaskContainer.add(task);
+        // avoid task without task description
+        if(!task.getTaskName().isEmpty()) {
+            task.setId(getNextId());
+            this.dummyTaskContainer.add(task);
+        }
         return task;
     }
 
@@ -51,7 +54,9 @@ public class DummyTaskService implements TaskService {
     public void resetDummyData() {
         this.dummyTaskContainer = new ArrayList<Task>();
         for(int a=1;a<=5;a++) {
-            addTask(new Task(String.format("Dummy Task %d", a)));
+            Task task = addTask(new Task(String.format("Dummy Task %d", a)));
+            if(a%2==0)
+                task.setChecked(true);
         }
     }
 
