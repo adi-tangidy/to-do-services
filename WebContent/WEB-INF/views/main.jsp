@@ -49,15 +49,15 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-				<ul>
+				<ul class="list-group">
 					<c:forEach var="task" items="${taskList }">
 						<c:choose>
 							<c:when test="${task.checked}">
-								<li style="text-decoration: line-through;">${task.taskName }</li>
+								<li class="list-group-item" style="text-decoration: line-through;">${task.taskName }</li>
 							</c:when>
 							<c:otherwise>
 								<form action="check/${task.id}" method="POST">
-								<li>${task.taskName }<button class="btn btn-default">Done</button></li>
+								<li class="list-group-item">${task.taskName } <button class="btn btn-default">Done</button></li>
 								</form>
 							</c:otherwise>
 						</c:choose>
