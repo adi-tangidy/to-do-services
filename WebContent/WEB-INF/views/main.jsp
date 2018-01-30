@@ -24,11 +24,15 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<div class="jumbotron jumbotron-fluid">
-		<div class="container">
-			<h1>To Do List</h1>
-			<p>Easily managed your to do list...</p>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="jumbotron jumbotron-fluid col-md-8">
+			<div class="container">
+				<h1>To Do List</h1>
+				<p>Easily managed your to do list...</p>
+			</div>
 		</div>
+		<div class="col-md-2"></div>
 	</div>
 	<div class="container-fluid">
 		<div class="row">
@@ -50,18 +54,28 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<ul class="list-group">
-					<c:forEach var="task" items="${taskList }">
-						<c:choose>
-							<c:when test="${task.checked}">
-								<li class="list-group-item" style="text-decoration: line-through;">${task.taskName }</li>
-							</c:when>
-							<c:otherwise>
-								<form action="check/${task.id}" method="POST">
-								<li class="list-group-item">${task.taskName } <button class="btn btn-default">Done</button></li>
-								</form>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
+					<li class="list-group-item"><span style="font-weight: bold;">Incomplete Task</span></li>
+					<li class="list-group-item">
+						<ul class="list-group">
+							<c:forEach var="task" items="${taskList }">
+								<c:if test="${!task.checked}">
+										<form action="check/${task.id}" method="POST">
+											<li class="list-group-item">${task.taskName } <button class="btn btn-default">Done</button></li>
+										</form>
+								</c:if>
+							</c:forEach>
+						</ul>
+					</li>
+					<li class="list-group-item"><span style="font-weight: bold;">Completed Task</span></li>
+					<li class="list-group-item">
+						<ul class="list-group">
+							<c:forEach var="task" items="${taskList }">
+								<c:if test="${task.checked}">
+									<li class="list-group-item" style="text-decoration: line-through;">${task.taskName}</li>
+								</c:if>
+							</c:forEach>
+						</ul>
+					</li>
 				</ul>
 			</div>
 			<div class="col-md-2"></div>
