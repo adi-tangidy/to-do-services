@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vee.todoservice.AbstractTest;
-import com.vee.todoservice.mock.DummyTaskService;
 import com.vee.todoservice.model.Task;
 
 public class TaskServiceTest extends AbstractTest{

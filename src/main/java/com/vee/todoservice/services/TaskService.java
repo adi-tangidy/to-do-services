@@ -13,6 +13,8 @@ public interface TaskService {
     void toggleTaskCheck(Task task);
     
     List<Task> findAll();
+
+    List<Task> findByStatus(Boolean isFinished);
     
     Task findByID(Long id);
 }

@@ -3,6 +3,7 @@ package com.vee.todoservice.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -58,6 +59,13 @@ public class DummyTaskService implements TaskService {
             if(a%2==0)
                 task.setChecked(true);
         }
+    }
+
+    @Override
+    public List<Task> findByStatus(Boolean isFinished) {
+        return this.dummyTaskContainer.stream()
+                .filter(t -> t.isChecked() == isFinished)
+                .collect(Collectors.toList());
     }
 
 }
