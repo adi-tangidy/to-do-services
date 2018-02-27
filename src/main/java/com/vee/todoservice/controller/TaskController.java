@@ -2,6 +2,7 @@ package com.vee.todoservice.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,8 @@ import com.vee.todoservice.services.TaskService;
 @Controller
 public class TaskController {
 
+    private static final Logger logger = Logger.getLogger(TaskController.class.getName());
+    
     @Autowired
     private TaskService taskService;
     
@@ -35,6 +38,7 @@ public class TaskController {
         taskService.addTask(new Task(task));
         try {
             response.sendRedirect(request.getContextPath());
+            logger.info(String.format("Redirected to %s.", request.getContextPath()));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -50,6 +54,7 @@ public class TaskController {
         taskService.toggleTaskCheck(currTask);
         try {
             response.sendRedirect(request.getContextPath());
+            logger.info(String.format("Redirected to %s.", request.getContextPath()));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
