@@ -1,7 +1,9 @@
 package com.vee.todoservice.controller;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +30,31 @@ public class TaskController {
     }
     
     @RequestMapping(value="/add", method=RequestMethod.POST)
-    public ModelAndView addTask(@RequestParam("task")String task, HttpServletResponse response) {
+    public ModelAndView addTask(@RequestParam("task")String task, HttpServletResponse response, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("main");
         taskService.addTask(new Task(task));
+        try {
+            response.sendRedirect(request.getContextPath());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return mv;
     }
     
     @RequestMapping(value="/check/{id}", method=RequestMethod.POST)
-    public ModelAndView checkTask(@PathVariable("id") String taskId, HttpServletResponse response) {
+    public ModelAndView checkTask(@PathVariable("id") String taskId, HttpServletResponse response, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("main");
         
         Task currTask = taskService.findByID(Long.parseLong(taskId));
         taskService.toggleTaskCheck(currTask);
+        try {
+            response.sendRedirect(request.getContextPath());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
         return mv;
     }
     
