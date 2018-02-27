@@ -37,10 +37,10 @@ public class TaskController {
         ModelAndView mv = new ModelAndView("main");
         taskService.addTask(new Task(task));
         try {
+          //FIXME: redirection is not supported in HTTPS domain
             response.sendRedirect(request.getContextPath());
             logger.info(String.format("Redirected to %s.", request.getContextPath()));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return mv;
@@ -53,10 +53,10 @@ public class TaskController {
         Task currTask = taskService.findByID(Long.parseLong(taskId));
         taskService.toggleTaskCheck(currTask);
         try {
+            //FIXME: redirection is not supported in HTTPS domain
             response.sendRedirect(request.getContextPath());
             logger.info(String.format("Redirected to %s.", request.getContextPath()));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         
