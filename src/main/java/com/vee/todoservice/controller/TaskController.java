@@ -1,6 +1,5 @@
 package com.vee.todoservice.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -32,12 +31,6 @@ public class TaskController {
     public ModelAndView addTask(@RequestParam("task")String task, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView("main");
         taskService.addTask(new Task(task));
-        try {
-            response.sendRedirect("/to-do-service/");
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         return mv;
     }
     
@@ -47,13 +40,6 @@ public class TaskController {
         
         Task currTask = taskService.findByID(Long.parseLong(taskId));
         taskService.toggleTaskCheck(currTask);
-        try {
-            response.sendRedirect("/to-do-service/");
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
         return mv;
     }
     
