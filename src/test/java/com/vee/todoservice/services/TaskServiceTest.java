@@ -75,6 +75,11 @@ public class TaskServiceTest extends AbstractTest{
     public void failingTest() {
         assertEquals(1, 2);
     }
+
+    @Test
+    public void passingTest() {
+        assertEquals(2, 2);
+    }
     
     @Before
     public void init() {
