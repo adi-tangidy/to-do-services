@@ -3,6 +3,7 @@ package com.vee.todoservice.services;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
@@ -68,6 +69,11 @@ public class TaskServiceTest extends AbstractTest{
         // re-toggle task checked state
         Task finalTask = taskService.findByID(1L);
         assertThat(finalTask.isChecked(), is(equalTo(false)));
+    }
+    
+    @Test
+    public void failingTest() {
+        assertEquals(1, 2);
     }
     
     @Before
